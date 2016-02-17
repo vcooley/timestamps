@@ -1,0 +1,16 @@
+{
+  "name": "timestamps",
+  "version": "0.0.1",
+  "description": "A microservice to parse and respond to requests for timestamps",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+  }
+}
