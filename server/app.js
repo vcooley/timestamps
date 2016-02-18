@@ -21,18 +21,24 @@ app.use('/favicon.ico', function(req, res) {
 app.use('/:timestamp', function(req, res) {
   var timestamp = req.params.timestamp;
   var date;
+  var timeObj = {
+    unix: null,
+    natural: null
+  };
   if (Number(timestamp)) {
     date = new Date(Number(timestamp))
   }
   else if (Date.parse(timestamp)) {
     date = new Date(Date.parse(timestamp));
   }
+  if (date) {
+    var options = {year: 'numeric', month: 'long', day: 'numeric'};
+    timeObj.unix = date.getTime();
+    timeObj.natural = date.toLocaleString('en-US', options);
+  }
   res
     .status(200, 'OK')
-    .json({
-      unix: date.getTime() / 1000 || null,
-      natural: date.toString() || null
-    });
+    .json(timeObj);
 });
 
 app.use('/*', function(req, res) {
