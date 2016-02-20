@@ -7,11 +7,10 @@ function getNaturalDate(date) {
     day: 'numeric',
     timeZone: 'UTC'
   };
-
   return date.toLocaleString('en-US', options);
 }
 
-var showTime = function (req, res) {
+function showTime(req, res) {
   var timestamp = req.params.timestamp;
   var date;
   var timeObj = {
@@ -21,7 +20,7 @@ var showTime = function (req, res) {
 
   // Check the two conditions required for a valid timestamp
   if (Number(timestamp)) {
-    date = new Date(Number(timestamp))
+    date = new Date(timestamp * 1000)
   }
   else if (Date.parse(timestamp)) {
     date = new Date(Date.parse(timestamp));
@@ -37,6 +36,7 @@ var showTime = function (req, res) {
   res
     .status(200, 'OK')
     .json(timeObj);
-};
+}
 
 module.exports.showTime = showTime;
+module.exports.naturalDate = getNaturalDate;
