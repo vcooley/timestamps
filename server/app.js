@@ -15,7 +15,8 @@ var app = express();
 var server = require('http').createServer(app);
 require('./routes')(app);
 
-server.listen(config.port, config.ip, function() {
+app.set('port', (process.env.PORT) || 5000);
+server.listen(app.get('port'), function() {
   console.log('Express server listening on %d, in %s mode',
     config.port,
     'development');
